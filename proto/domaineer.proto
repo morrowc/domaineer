@@ -4,6 +4,8 @@
 syntax = "proto3";
 package domaineer.proto;
 
+option go_package = "github.com/morrowc/domaineer/proto/domaineer";
+
 // Domaineer permits a shadow-master server to add/remove
 // domains from one/some public master DNS servers. Additionally,
 // the masters can request a list of active domains in order to
