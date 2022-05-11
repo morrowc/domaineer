@@ -42,7 +42,7 @@ message ListRequest {
   string key = 1;
 }
 
-message ListReesponse {
+message ListResponse {
   string key = 1;
   repeated string domain = 2;
 }
