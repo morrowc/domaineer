@@ -1,0 +1,48 @@
+//
+// Proto definition for domaineer service.
+
+syntax = "proto3";
+package domaineer.proto;
+
+// Domaineer permits a shadow-master server to add/remove
+// domains from one/some public master DNS servers. Additionally,
+// the masters can request a list of active domains in order to
+// reconcile the set of served domains with the shadow master's
+// collection.
+service Domaineer {
+  // Add a single domain to the public master's control plane.
+  rpc AddDomain (Request) returns (Response);
+
+  // Remove a single domain from the public master's control plane.
+  rpc RemoveDomain (Request) returns (Response);
+
+  // List all domains under the control of the shadow master.
+  rpc ListDomains (ListRequest) returns (ListResponse);
+}
+
+// Request may be used to Add or Remove a domain from control.
+message Request {
+  // key is a base64 shared key used to identify the endpoints.
+  string key = 1;
+  // id is a UUID-4 used to identify the transaction.
+  string id = 2;
+  string domain = 3;
+}
+
+// Response returns an error if there was one during processing.
+message Response {
+  // key is a base64 shared key used to identify the endpoints.
+  string key = 1;
+  // id is a UUID-4 used to identify the transaction.
+  string id = 2;
+  string error = 3;
+}
+
+message ListRequest {
+  string key = 1;
+}
+
+message ListReesponse {
+  string key = 1;
+  repeated string domain = 2;
+}
